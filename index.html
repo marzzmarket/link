@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profil Bisnis Digital</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(to bottom, #87CEEB, #1E3A8A);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 10px 0;
+            text-align: center;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            transition: background 0.3s ease, padding 0.3s ease;
+        }
+
+        header.scrolled {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 8px 0;
+        }
+
+        .logo {
+            width: 50px;
+            height: 50px;
+            margin-bottom: 5px;
+            border-radius: 50%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .logo:hover {
+            transform: scale(1.1);
+        }
+
+        h1 {
+            color: white;
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 5px;
+            animation: fadeInDown 1s ease;
+        }
+
+        nav {
+            margin-top: 5px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 10px;
+            font-weight: 400;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+            display: inline-block;
+        }
+
+        nav a:hover {
+            color: #FFD700;
+        }
+
+        main {
+            margin-top: 80px;
+            padding: 20px 0;
+            transition: margin-top 0.3s ease;
+        }
+
+        section {
+            background: rgba(255, 255, 255, 0.95);
+            margin: 30px 0;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        section:nth-child(1) { transition-delay: 0.1s; }
+        section:nth-child(2) { transition-delay: 0.2s; }
+        section:nth-child(3) { transition-delay: 0.3s; }
+
+        h2 {
+            text-align: center;
+            color: #1E3A8A;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .intro-text {
+            text-align: center;
+            font-size: 1rem;
+            color: #555;
+            max-width: 800px;
+            margin: 0 auto 20px;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .service-card {
+            background: linear-gradient(to bottom, #87CEEB, #1E3A8A);
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .service-card i {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 1.5rem;
+        }
+
+        .service-card h3 {
+            font-size: 0.9rem;
+            margin: 0;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            text-align: center;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background: #87CEEB;
+            color: white;
+            padding: 12px;
+            border-radius: 10px;
+            transition: background 0.3s ease;
+            text-decoration: none;
+        }
+
+        .contact-item:hover {
+            background: #1E3A8A;
+        }
+
+        .social-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 12px;
+            margin-top: 15px;
+        }
+
+        .social-item {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background: #1E3A8A;
+            color: white;
+            padding: 12px;
+            border-radius: 10px;
+            text-decoration: none;
+            transition: background 0.3s ease, transform 0.3s ease;
+            font-size: 0.8rem;
+        }
+
+        .social-item:hover {
+            background: #87CEEB;
+            transform: scale(1.05);
+        }
+
+        .social-item i {
+            font-size: 1.1rem;
+        }
+
+        footer {
+            text-align: center;
+            padding: 15px;
+            color: white;
+            background: rgba(0, 0, 0, 0.2);
+            margin-top: 30px;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 15px;
+            }
+
+            h1 {
+                font-size: 1.3rem;
+            }
+
+            h2 {
+                font-size: 1.5rem;
+            }
+
+            section {
+                padding: 20px;
+                margin: 20px 0;
+            }
+
+            .services-grid {
+                grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+                gap: 10px;
+            }
+
+            .social-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 10px;
+            }
+
+            nav a {
+                display: block;
+                margin: 3px 0;
+                font-size: 0.8rem;
+            }
+
+            main {
+                margin-top: 70px;
+                padding: 15px 0;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo {
+                width: 40px;
+                height: 40px;
+            }
+
+            h1 {
+                font-size: 1.1rem;
+            }
+
+            .services-grid,
+            .social-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-item,
+            .social-item {
+                flex-direction: column;
+                text-align: center;
+                gap: 5px;
+            }
+
+            main {
+                margin-top: 60px;
+                padding: 10px 0;
+            }
+
+            nav a {
+                margin: 2px 0;
+            }
+
+            header {
+                padding: 8px 0;
+            }
+
+            header.scrolled {
+                padding: 5px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header id="header">
+        <div class="container">
+            <img src="logo-marzz-market.png" alt="Logo Marzz Market" class="logo">
+            <h1>Marzz Market</h1>
+            <!-- Ganti teks h1 dengan nama bisnis Anda; header tetap fixed & kompak -->
+            <nav>
+                <a href="#layanan">Layanan</a>
+                <a href="#kontak">Hubungi Kami</a>
+                <a href="#sosial">Sosial Media</a>
+            </nav>
+        </div>
+    </header>
+
+    <main id="main">
+        <div class="container">
+            <section id="layanan">
+                <h2>Layanan Kami</h2>
+                <p class="intro-text">Kami menyediakan layanan digital ataupun games terpercaya untuk kebutuhan harian Anda. Dari rekber hingga jual akun game, semuanya cepat dan aman.</p>
+                <div class="services-grid">
+                    <div class="service-card">
+                        <i class="fas fa-handshake"></i>
+                        <h3>Rekber</h3>
+                    </div>
+                    <div class="service-card">
+                        <i class="fas fa-edit"></i>
+                        <h3>Jasa Posting</h3>
+                    </div>
+                    <div class="service-card">
+                        <i class="fas fa-mobile-alt"></i>
+                        <h3>Topup Games</h3>
+                    </div>
+                    <div class="service-card">
+                        <i class="fas fa-paint-brush"></i>
+                        <h3>Design Logo</h3>
+                    </div>
+                    <div class="service-card">
+                        <i class="fas fa-credit-card"></i>
+                        <h3>PPOB</h3>
+                    </div>
+                    <div class="service-card">
+                        <i class="fas fa-gamepad"></i>
+                        <h3>Jual Akun Free Fire</h3>
+                    </div>
+                </div>
+            </section>
+
+            <section id="kontak">
+                <h2>Hubungi Kami</h2>
+                <div class="contact-info">
+                    <a href="https://wa.me/6285165824972" class="contact-item" rel="noopener" target="_blank">
+                        <i class="fab fa-whatsapp"></i>
+                        <span>WhatsApp: +62 851-6582-4972</span>
+                    </a>
+                    <a href="https://t.me/@marzzmarket" class="contact-item" rel="noopener" target="_blank">
+                        <i class="fab fa-telegram"></i>
+                        <span>Telegram: @marzzmarket</span>
+                    </a>
+                    <a href="mailto:marzzmarket@email.com" class="contact-item" rel="noopener">
+                        <i class="fas fa-envelope"></i>
+                        <span>Email: marzzmarket@email.com</span>
+                    </a>
+                </div>
+            </section>
+
+            <section id="sosial">
+                <h2>Sosial Media</h2>
+                <div class="social-grid">
+                    <a href="https://tiktok.com/@marzz.404" class="social-item" rel="noopener" target="_blank">
+                        <i class="fab fa-tiktok"></i>
+                        <span>Marzz</span>
+                    </a>
+                    <a href="https://tiktok.com/@marzz.markett" class="social-item" rel="noopener" target="_blank">
+                        <i class="fab fa-tiktok"></i>
+                        <span>Marzz Market</span>
+                    </a>
+                    <a href="https://tiktok.com/@marzz.gadgett" class="social-item" rel="noopener" target="_blank">
+                        <i class="fab fa-tiktok"></i>
+                        <span>Marzz Gadget</span>
+                    </a>
+                    <a href="https://tiktok.com/@marzz.cryptofx" class="social-item" rel="noopener" target="_blank">
+                        <i class="fab fa-tiktok"></i>
+                        <span>Marzz CryptoFX</span>
+                    </a>
+                    <a href="https://tiktok.com/@learntrading.id" class="social-item" rel="noopener" target="_blank">
+                        <i class="fab fa-tiktok"></i>
+                        <span>Learn Trading</span>
+                    </a>
+                    <a href="https://instagram.com/marzz.market" class="social-item" rel="noopener" target="_blank">
+                        <i class="fab fa-instagram"></i>
+                        <span>@marzz.market</span>
+                    </a>
+                    <a href="https://instagram.com/marzz.shopgame" class="social-item" rel="noopener" target="_blank">
+                        <i class="fab fa-instagram"></i>
+                        <span>@marzz.shopgame</span>
+                    </a>
+                    <a href="https://instagram.com/marzz.design" class="social-item" rel="noopener" target="_blank">
+                        <i class="fab fa-instagram"></i>
+                        <span>@marzz.design</span>
+                    </a>
+                    <a href="https://instagram.com/marzz.gadget" class="social-item" rel="noopener" target="_blank">
+                        <i class="fab fa-instagram"></i>
+                        <span>@marzz.gadget</span>
+                    </a>
+                    <a href="https://instagram.com/marzz.cryptofx" class="social-item" rel="noopener" target="_blank">
+                        <i class="fab fa-instagram"></i>
+                        <span>@marzz.cryptofx</span>
+                    </a>
+                    <a href="https://instagram.com/learntrading.id" class="social-item" rel="noopener" target="_blank">
+                        <i class="fab fa-instagram"></i>
+                        <span>@learntrading.id</span>
+                    </a>
+                    <a href="https://youtube.com/@marzzgaming01" class="social-item" rel="noopener" target="_blank">
+                        <i class="fab fa-youtube"></i>
+                        <span>Marzz</span>
+                    </a>
+                    <a href="https://youtube.com/@marzzmarket" class="social-item" rel="noopener" target="_blank">
+                        <i class="fab fa-youtube"></i>
+                        <span>Marzz Design</span>
+                    </a>
+                    <a href="https://youtube.com/@marzzcfx" class="social-item" rel="noopener" target="_blank">
+                        <i class="fab fa-youtube"></i>
+                        <span>Marzz CryptoFX</span>
+                    </a>
+                    <a href="https://saweria.co/marzzmarket" class="social-item" rel="noopener" target="_blank">
+                        <i class="fas fa-donate"></i>
+                        <span>Saweria</span>
+                    </a>
+                    <a href="https://linktr.ee/marzzmarket" class="social-item" rel="noopener" target="_blank">
+                        <i class="fas fa-link"></i>
+                        <span>Linktree</span>
+                    </a>
+                    <a href="https://lynk.id/marzzmarket" class="social-item" rel="noopener" target="_blank">
+                        <i class="fas fa-link"></i>
+                        <span>Lynk.id</span>
+                    </a>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; <span id="year"></span> Marzz Market. Semua hak dilindungi.</p>
+    </footer>
+
+    <script>
+        // Set tahun footer dinamis
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        // Animasi scroll untuk section (dengan fallback)
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        let observer;
+        if ('IntersectionObserver' in window) {
+            observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('section').forEach(section => {
+                observer.observe(section);
+            });
+        } else {
+            // Fallback: tampilkan semua section segera
+            document.querySelectorAll('section').forEach(section => {
+                section.classList.add('visible');
+            });
+        }
+
+        // Efek scroll pada header (kompak, tetap fixed)
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('header');
+            const main = document.getElementById('main');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+                main.style.marginTop = window.innerWidth <= 768 ? '60px' : '70px';
+            } else {
+                header.classList.remove('scrolled');
+                main.style.marginTop = window.innerWidth <= 768 ? '70px' : '80px';
+            }
+        });
+
+        // Smooth scroll untuk nav links
+        document.querySelectorAll('nav a').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href').substring(1);
+                const target = document.getElementById(targetId);
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
